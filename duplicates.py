@@ -21,6 +21,8 @@ def get_duplicate_files(start_path):
 
 
 def hashfile(path, blocksize=65536):
+    """https://www.pythoncentral.io/finding-duplicate-files-with-python/
+    """
     hasher = hashlib.md5()
     afile = open(path, 'rb')
     buf = afile.read(blocksize)
@@ -32,8 +34,10 @@ def hashfile(path, blocksize=65536):
 
 
 def print_duplicate_files(duplicate_files):
-    results = list(filter(lambda x: len(x) > 1,
-                          duplicate_files.values()))
+    results = list(filter(
+        lambda x: len(x) > 1,
+        duplicate_files.values())
+    )
     if len(results) > 0:
         print('\nНайдены дубликаты:')
         print('Названия могут быть разными,но содержание одинаковым')
@@ -49,11 +53,12 @@ def print_duplicate_files(duplicate_files):
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         start_path = sys.argv[1]
-        if os.path.exists(start_path):
-            duplicate_files = get_duplicate_files(start_path)
-            print_duplicate_files(duplicate_files)
-        else:
-            print("Введено неверное имя директории")
     else:
-        print("Для работы программы введите имя директории")
+        sys.exit("Для работы программы введите имя директории")
+
+    if os.path.exists(start_path):
+        duplicate_files = get_duplicate_files(start_path)
+        print_duplicate_files(duplicate_files)
+    else:
+        sys.exit("Введено неверное имя директории")
 
