@@ -1,4 +1,4 @@
-# Anti-Duplicator
+# Анти-дубликатор
 
 Скрипт для поиска файлов дубликатов в указанной директории.
 
@@ -10,7 +10,6 @@
 Пример выполнения скрипта, Python 3.5:
 
 ```bash
-
 $ python3 duplicates.py dir_with_files/
 Сканирую...dir_with_files/
 Сканирую...dir_with_files/dir_2
@@ -21,16 +20,14 @@ $ python3 duplicates.py dir_with_files/
 Сканирую...dir_with_files/dir_1/dir_1_1/dir_1_1_1
 
 Найдены дубликаты:
-Названия могут быть разными,но содержание одинаковым
+Названия могут быть разными, но содержание одинаковым
 ___________________
 dir_with_files/dir_1/file.txt
 dir_with_files/dir_1/dir_1_2/filed.txt
 dir_with_files/dir_1/dir_1_1/file.txt
 dir_with_files/dir_1/dir_1_1/dir_1_1_1/file.txt
-
-
 ```
 
-# Project Goals
+# Цели проекта
 
-The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)
+Код создан в учебных целях. В рамках учебного курса по веб-разработке ― [DEVMAN.org](https://devman.org)
