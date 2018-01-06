@@ -1,26 +1,28 @@
 import os
 import sys
 import hashlib
+from collections import defaultdict
 
 
 def scan_directory(start_path):
-    files_dict = {}
+    files_dict = defaultdict(list)
     for dir_name, subdir_list, file_list in os.walk(start_path):
-        print("Сканирую...{}".format(dir_name))
+        print_current_dir_name(dir_name)
         for filename in file_list:
             path_to_file = os.path.join(
                 dir_name,
                 filename
             )
             file_hash = hashfile(path_to_file)
-            if file_hash in files_dict:
-                files_dict[file_hash].append(path_to_file)
-            else:
-                files_dict[file_hash] = [path_to_file]
+            files_dict[file_hash].append(path_to_file)
     return files_dict
 
 
-def filter_dublicate_files(files_dict):
+def print_current_dir_name(dir_name):
+    print("Сканирую...{}".format(dir_name))
+
+
+def get_dublicate_files(files_dict):
     duplicate_files = list(filter(
         lambda x: len(x) > 1,
         files_dict.values())
@@ -28,16 +30,11 @@ def filter_dublicate_files(files_dict):
     return duplicate_files
 
 
-def hashfile(path, blocksize=65536):
-    """https://www.pythoncentral.io/finding-duplicate-files-with-python/
-    """
+def hashfile(path_to_file, blocksize=65536):
     hasher = hashlib.md5()
-    afile = open(path, 'rb')
-    buf = afile.read(blocksize)
-    while buf:
+    with open(path_to_file, 'rb') as file:
+        buf = file.read(blocksize)
         hasher.update(buf)
-        buf = afile.read(blocksize)
-    afile.close()
     return hasher.hexdigest()
 
 
@@ -62,7 +59,7 @@ if __name__ == "__main__":
 
     if os.path.exists(start_path):
         files_dict = scan_directory(start_path)
-        duplicate_files = filter_dublicate_files(files_dict)
+        duplicate_files = get_dublicate_files(files_dict)
         print_duplicate_files(duplicate_files)
     else:
         sys.exit("Введено неверное имя директории")
