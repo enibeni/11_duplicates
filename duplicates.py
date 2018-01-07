@@ -4,7 +4,7 @@ import hashlib
 from collections import defaultdict
 
 
-def scan_directory(start_path):
+def get_files_dict(start_path):
     files_dict = defaultdict(list)
     for dir_name, subdir_list, file_list in os.walk(start_path):
         print_current_dir_name(dir_name)
