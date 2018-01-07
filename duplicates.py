@@ -58,7 +58,7 @@ if __name__ == "__main__":
         sys.exit("Для работы программы введите имя директории")
 
     if os.path.exists(start_path):
-        files_dict = scan_directory(start_path)
+        files_dict = get_files_dict(start_path)
         duplicate_files = get_dublicate_files(files_dict)
         print_duplicate_files(duplicate_files)
     else:
